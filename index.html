@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Convite de Formatura</title>
+  <meta name="theme-color" content="#0A1220">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="fechado">
+
+  <!-- CAPA: envelope com selo dourado -->
+  <section class="capa" id="capa" aria-label="Capa do convite">
+    <div class="envelope" aria-hidden="true">
+      <div class="envelope-fundo"></div>
+      <div class="envelope-carta">
+        <span>Convite</span>
+        <span class="carta-linha"></span>
+        <span>Formatura</span>
+      </div>
+      <div class="envelope-lado esq"></div>
+      <div class="envelope-lado dir"></div>
+      <div class="envelope-base"></div>
+      <div class="envelope-aba"></div>
+      <button class="selo" id="selo" type="button" aria-label="Abrir convite">
+        <span class="selo-anel"></span>
+        <span class="selo-iniciais" id="iniciais">EDC</span>
+      </button>
+    </div>
+    <p class="dica" id="dica">Toque no selo para abrir o convite</p>
+  </section>
+
+  <!-- CONVITE -->
+  <main class="convite" id="convite">
+
+    <header class="hero">
+      <p class="hero-topo" data-txt="chamada">Você é convidado(a) para a colação de grau de</p>
+      <h1 class="nome" id="nome" aria-label="ERLON DUTRA">ERLON DUTRA</h1>
+      <p class="curso" data-txt="curso"></p>
+      <p class="inst" data-txt="instituicao"></p>
+    </header>
+
+    <section class="texto">
+      <p class="frase">Entre livros, autores e palavras que mudaram meu modo de ver o mundo, chego ao fim de uma etapa. Ela só faz sentido com quem esteve ao meu lado.</p>
+      <div class="familia" id="familia"></div>
+    </section>
+
+    <section class="detalhes" aria-label="Programação">
+      <article class="bloco">
+        <h2>Cerimônia</h2>
+        <p class="data" data-data="cerimonia"></p>
+        <p class="hora" data-hora="cerimonia"></p>
+        <p class="local" data-local="cerimonia"></p>
+      </article>
+    </section>
+
+    <section class="contagem" aria-live="polite">
+      <div><strong id="cd-dias">0</strong><span>dias</span></div>
+      <div><strong id="cd-horas">0</strong><span>horas</span></div>
+      <div><strong id="cd-min">0</strong><span>minutos</span></div>
+      <div><strong id="cd-seg">0</strong><span>segundos</span></div>
+    </section>
+
+    <section class="acoes">
+      <a class="btn principal" id="btn-rsvp" href="#" target="_blank" rel="noopener">Confirmar presença</a>
+      <a class="btn" id="btn-mapa" href="#" target="_blank" rel="noopener">Como chegar</a>
+      <button class="btn" id="btn-agenda" type="button">Salvar na agenda</button>
+    </section>
+
+    <footer class="rodape">
+      <p>Toda palavra é uma porta. Obrigado por atravessar esta comigo.</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+/* ==========================================================
+   CONVITE DE FORMATURA – LETRAS
+   Edite as cores e fontes nas variáveis abaixo.
+   ========================================================== */
+:root {
+  --noite: #0a1220;
+  --tinta: #14213a;
+  --ouro: #c8a45a;
+  --ouro-claro: #ecd9a4;
+  --ouro-escuro: #8f6f2f;
+  --papel: #f3eee4;
+  --grafite: #2a2f3b;
+  --suave: #6b7080;
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  font-weight: 300;
+  color: var(--grafite);
+  background: var(--papel);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body.fechado { overflow: hidden; height: 100vh; }
+:focus-visible { outline: 2px solid var(--ouro); outline-offset: 4px; }
+
+/* ---------------- CAPA ---------------- */
+.capa {
+  position: fixed; inset: 0; z-index: 10;
+  display: grid; place-items: center;
+  pointer-events: auto;
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(31,48,76,.72), transparent 58%),
+    var(--noite);
+  transition: opacity .6s ease 1.25s;
+}
+.envelope {
+  position: relative;
+  width: min(82vw, 520px);
+  aspect-ratio: 1.62;
+  perspective: 1000px;
+}
+.envelope-fundo {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(236,217,164,.36);
+  border-radius: 7px;
+  background: linear-gradient(145deg, #263a5d, #111d33 72%);
+  box-shadow: 0 28px 70px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.1);
+}
+.envelope-carta {
+  position: absolute; z-index: 1;
+  inset: 8% 12% 4%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .35rem;
+  border: 1px solid rgba(143,111,47,.35);
+  background: var(--papel);
+  color: var(--ouro-escuro);
+  font: italic 500 clamp(1.15rem, 4vw, 1.8rem) var(--serif);
+  box-shadow: 0 4px 15px rgba(0,0,0,.18);
+  transition: transform .9s cubic-bezier(.2,.7,.2,1) .18s;
+}
+.carta-linha { width: 30%; height: 1px; background: var(--ouro); }
+.envelope-lado, .envelope-base, .envelope-aba {
+  position: absolute; inset: 0;
+}
+.envelope-lado { z-index: 2; background: linear-gradient(135deg, #31476c, #1b2b47); }
+.envelope-lado.esq { clip-path: polygon(0 0, 51% 52%, 0 100%); }
+.envelope-lado.dir { clip-path: polygon(100% 0, 49% 52%, 100% 100%); }
+.envelope-base {
+  z-index: 3;
+  background: linear-gradient(160deg, #263a5c, #172641 70%);
+  clip-path: polygon(0 100%, 0 0, 50% 56%, 100% 0, 100% 100%);
+}
+.envelope-aba {
+  z-index: 4;
+  inset: 0 0 auto;
+  height: 63%;
+  background: linear-gradient(155deg, #344b70, #1d2e4d 72%);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: 50% 0;
+  backface-visibility: hidden;
+  transition: transform .85s cubic-bezier(.65,0,.25,1);
+}
+.capa.aberta .envelope-aba { transform: rotateX(180deg); }
+.capa.aberta .envelope-carta { transform: translateY(-48%); }
+.capa.aberta { opacity: 0; pointer-events: none; }
+
+.selo {
+  position: relative; z-index: 2;
+  width: clamp(150px, 34vw, 210px); aspect-ratio: 1;
+  border: 0; cursor: pointer;
+  display: grid; place-items: center;
+  border-radius: 48% 52% 50% 50% / 52% 48% 52% 48%;
+  background:
+    radial-gradient(circle at 32% 28%, var(--ouro-claro) 0%, var(--ouro) 42%, var(--ouro-escuro) 100%);
+  box-shadow:
+    inset 0 3px 8px rgba(255,255,255,.45),
+    inset 0 -8px 16px rgba(80,55,10,.55),
+    0 18px 50px rgba(0,0,0,.6);
+  animation: pulsa 3.2s ease-in-out infinite;
+  transition: transform .9s cubic-bezier(.6,0,.2,1), opacity .7s ease;
+}
+.selo:hover { filter: brightness(1.06); }
+.selo-anel {
+  position: absolute; inset: 13%;
+  border-radius: 50%;
+  border: 1.5px solid rgba(80,55,10,.55);
+  box-shadow: 0 1px 0 rgba(255,255,255,.4);
+}
+.selo-iniciais {
+  font-family: var(--serif); font-weight: 600; font-style: italic;
+  font-size: clamp(2.4rem, 8vw, 3.6rem);
+  color: rgba(70,48,8,.85);
+  text-shadow: 0 1px 0 rgba(255,255,255,.45);
+  letter-spacing: .02em;
+}
+@keyframes pulsa {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(1.1); }
+}
+.dica {
+  position: absolute; z-index: 2;
+  bottom: 12vh; left: 0; right: 0; text-align: center;
+  font-family: var(--serif); font-style: italic; font-size: 1.25rem;
+  color: var(--ouro-claro); opacity: .85;
+  transition: opacity .4s;
+}
+.selo {
+  position: absolute; z-index: 5; top: 54%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+.selo:hover { transform: translate(-50%, -50%) scale(1.04); }
+.capa.aberta .selo { transform: translate(-50%, -50%) scale(.72) rotate(8deg); opacity: 0; animation: none; }
+.capa.aberta .dica { opacity: 0; }
+.capa.fim { display: none; }
+
+/* ---------------- CONVITE ---------------- */
+.convite { max-width: 880px; margin: 0 auto; padding: 0 1.5rem; }
+.convite p { text-align: justify; text-align-last: center; }
+
+.hero { text-align: center; padding: clamp(4rem, 12vh, 8rem) 0 3rem; }
+.hero-topo {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.15rem, 3vw, 1.5rem); color: var(--suave);
+  text-align: justify; text-align-last: center;
+  max-width: 28ch; margin: 0 auto 1.5rem;
+}
+.nome {
+  font-family: var(--serif); font-weight: 600;
+  font-size: clamp(2.75rem, 8vw, 5rem);
+  line-height: 1.1; letter-spacing: 0;
+  color: var(--ouro-escuro);
+}
+
+.curso {
+  margin-top: 2rem;
+  font-family: var(--serif); font-weight: 500; font-size: clamp(1.4rem, 4vw, 2rem);
+  color: var(--tinta);
+}
+.inst { margin-top: .25rem; color: var(--suave); }
+
+.texto { text-align: center; padding: 2rem 0 3rem; }
+#convite .frase {
+  font-family: var(--serif); font-size: clamp(1.3rem, 3.2vw, 1.75rem);
+  line-height: 1.5; max-width: 34ch; margin: 0 auto;
+  text-align: justify; text-align-last: left;
+  color: var(--tinta);
+}
+.familia {
+  margin-top: 2.25rem; display: flex; flex-wrap: wrap;
+  justify-content: center; gap: .5rem 3rem;
+  font-size: .95rem; color: var(--suave);
+}
+.familia p strong { display: block; font-weight: 500; color: var(--grafite); }
+
+.detalhes {
+  display: grid; grid-template-columns: 1fr; gap: 2rem;
+  padding: 3rem 0; border-block: 1px solid rgba(200,164,90,.55);
+}
+.bloco { text-align: center; }
+.bloco h2 {
+  font-family: var(--serif); font-style: italic; font-weight: 400;
+  font-size: 1.6rem; color: var(--ouro-escuro); margin-bottom: .75rem;
+}
+.data { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; color: var(--tinta); text-transform: capitalize; }
+.hora { margin-bottom: .75rem; }
+.local { max-width: 28ch; margin: 0 auto; color: var(--suave); font-size: .95rem; }
+
+.contagem {
+  display: flex; justify-content: center; gap: clamp(1rem, 6vw, 3.5rem);
+  padding: 3.5rem 0 2.5rem;
+}
+.contagem div { text-align: center; min-width: 4.5rem; }
+.contagem strong {
+  display: block; font-family: var(--serif); font-weight: 300;
+  font-size: clamp(2.6rem, 9vw, 4.2rem); line-height: 1; color: var(--tinta);
+  font-variant-numeric: tabular-nums;
+}
+.contagem span { font-size: .85rem; color: var(--suave); }
+
+.acoes { display: flex; flex-wrap: wrap; justify-content: center; gap: .9rem; padding-bottom: 4rem; }
+.btn {
+  font: 400 1rem var(--sans); text-decoration: none; cursor: pointer;
+  padding: .95rem 1.8rem; border-radius: 999px;
+  color: var(--tinta); background: transparent;
+  border: 1px solid var(--ouro);
+  transition: background .25s, color .25s, transform .25s;
+}
+.btn:hover { background: var(--tinta); color: var(--ouro-claro); border-color: var(--tinta); }
+.btn.principal { background: var(--tinta); color: var(--ouro-claro); border-color: var(--tinta); }
+.btn.principal:hover { background: var(--ouro); color: var(--noite); border-color: var(--ouro); }
+
+.rodape {
+  text-align: center; padding: 3rem 1rem 4rem;
+  font-family: var(--serif); font-style: italic; font-size: 1.25rem; color: var(--suave);
+}
+
+/* ---------------- RESPONSIVO ---------------- */
+@media (max-width: 640px) {
+  .envelope { width: min(88vw, 460px); }
+  .dica { bottom: 10vh; padding: 0 1rem; font-size: 1.1rem; }
+  .detalhes { gap: 2.5rem; }
+  .btn { width: 100%; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .selo { animation: none; }
+  .capa, .envelope-aba, .envelope-carta, .selo { transition-duration: .01s; transition-delay: 0s; }
+  .nome .letra { opacity: 1; transform: none; animation: none !important; }
+}
